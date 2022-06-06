@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // * This is the password schema. a password is a combination of the service, username, and password. the password will be stored in the user's passwords array.
-const passwordSchema = new mongoose.Schema({
+const serviceSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
@@ -38,8 +38,8 @@ const passwordSchema = new mongoose.Schema({
     }
 });
 
-const Password = mongoose.model('Password', passwordSchema);
+const service = mongoose.model('Password', serviceSchema);
 const User = mongoose.model('User', userSchema);
 
 
-module.exports = [User, Password];
+module.exports = [User, service];
