@@ -16,6 +16,22 @@
 
 #### `/users/:username`
 - ##### `GET`
-    The `GET` for this endpoint is used to get all the passwords for a specific user.
+    The `GET` for this endpoint is used to get the user details for the given username.
 - ##### `POST`
     The `POST` for this endpoint is used to create a new password for a specific user. The required fields are `title`, `username`, `password`, and `url`.
+
+#### `/users/:username/:services`
+- ##### `GET`
+    The `GET` for this endpoint is used to get all services that a  user has on their account for the given username.
+- ##### `POST`
+    The `POST` for this endpoint is used to create a new service for a specific user. The required fields are `serviceName`, `username`, and `password`.
+- ##### `DELETE`
+    The `DELETE` for this endpoint is used to delete a service for a specific user. The required fields are `serviceName`, `username`, and `password`.
+
+#### `/users/:username/:services/:serviceName`
+- ##### `GET`
+    The `GET` for this endpoint is used to get the service details for the given service name.
+- ##### `PATCH`
+    The `PATCH` for this endpoint is used to update a service for a specific user. The required fields are `serviceName`, `username`, and `password`.
+- ##### `DELETE`
+    The `DELETE` for this endpoint is used to delete a service for a specific user. The required fields are `serviceName`, `username`, and `password`.
