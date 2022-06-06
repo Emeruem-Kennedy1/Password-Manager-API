@@ -13,7 +13,7 @@ router.get('/:apikey/Users/user', (req, res) => {
 
 })
 
-// * routing the useer 
+// * routing the user
 router.route('/:apikey/users/:user')
     .get(authenticate, (req, res) => {
         User.findOne({username: req.params.user}, (err, user) => {
