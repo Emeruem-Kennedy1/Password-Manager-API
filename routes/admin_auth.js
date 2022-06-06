@@ -1,7 +1,6 @@
 const express = require('express');
-const router = express.Router();
-
 const [Admin] = require('../db/admin_database');
+
 
 // * Authenticate the admin user
 
