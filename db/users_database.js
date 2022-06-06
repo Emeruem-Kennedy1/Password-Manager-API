@@ -28,14 +28,14 @@ const passwordSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    service: {
+    serviceName: {
         type: String,
         required: true,
     },
     username: {
         type: String,
         required: true,
-    },
+    }
 });
 
 const Password = mongoose.model('Password', passwordSchema);
