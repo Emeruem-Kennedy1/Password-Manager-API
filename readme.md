@@ -3,35 +3,41 @@
 
 ## Endpoints
 #### `/users`
-- ##### `POST`
-    The `POST` for this endpoint is used to create a new user. The reired fields are `username`, `email`, and `password`.
-- ##### `GET`
-    The `GET` for this endpoint is used to get all usernames in the database.
-- ##### `PUT`
-    The api does not support `PUT` requests.
-- ##### `DELETE`
-    The `DELETE` for this endpoint is used to delete all users in the database. This is only used for testing purposes. This endpoint should not be used in production.
-- ##### `PATCH`
-    This api does not support `PATCH` requests.
+| Method | Description |
+|--------|-------------|
+| `POST` |  create a new user. The reired fields are `username`, `email`, and `password`. |
+| `GET` | Get all usernames in the database |
+| `DELETE` | delete all users in the database. This is only used for testing purposes. This endpoint should not be used in production. |
+| `PATCH` | Not supported |
+| `PUT` | Not supported |
 
-#### `/users/:username`
-- ##### `GET`
-    The `GET` for this endpoint is used to get the user details for the given username.
-- ##### `POST`
-    The `POST` for this endpoint is used to create a new password for a specific user. The required fields are `title`, `username`, `password`, and `url`.
+#### `/users/:user`
+| Method | Description |
+|--------|-------------|
+| `GET` | Get a user details for the given username |
+| `DELETE` | delete a user by username |
+| `POST` | create a new password for a specific user. The required fields are `title`, `username`, `password`, and `url`. |
+| `PUT` | Not supported |
+| `PATCH` | Not Supported |
 
-#### `/users/:username/:services`
-- ##### `GET`
-    The `GET` for this endpoint is used to get all services that a  user has on their account for the given username.
-- ##### `POST`
-    The `POST` for this endpoint is used to create a new service for a specific user. The required fields are `serviceName`, `username`, and `password`.
-- ##### `DELETE`
-    The `DELETE` for this endpoint deletes all services for a specific user.
+
+
+
+#### `/users/:user/:services`
+| Method | Description |
+|--------|-------------|
+| `GET` | Get all services for a specific user|
+| `DELETE` | Delete deletes all services for a specific user.|
+| `POST` | Create a new service for a specific user. The required fields are `title`, `username`, `password`, and `url`. |
+| `PUT` | Not supported |
+| `PATCH` | Not Supported |
 
 #### `/users/:username/:services/:serviceName`
-- ##### `GET`
-    The `GET` for this endpoint is used to get the service details for the given service name.
-- ##### `PATCH`
-    The `PATCH` for this endpoint is used to update a service for a specific user. The required fields are `serviceName`, `username`, and `password`.
-- ##### `DELETE`
-    The `DELETE` for this endpoint is used to delete a service for a specific user. The required fields are `serviceName`, `username`, and `password`.
+| Method | Description |
+|--------|-------------|
+| `GET` | Get a specific service details for a specific user |
+| `DELETE` | Delete a service for a specific user. The required fields are `serviceName`, `username`, and `password`.|
+| `POST` | Not supported |
+| `PUT` | Not supported |
+| `PATCH` |update a service for a specific user. The required fields are `serviceName`, `username`, and `password`.|
+
