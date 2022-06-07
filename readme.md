@@ -26,7 +26,7 @@
 - ##### `POST`
     The `POST` for this endpoint is used to create a new service for a specific user. The required fields are `serviceName`, `username`, and `password`.
 - ##### `DELETE`
-    The `DELETE` for this endpoint is used to delete a service for a specific user. The required fields are `serviceName`, `username`, and `password`.
+    The `DELETE` for this endpoint deletes all services for a specific user.
 
 #### `/users/:username/:services/:serviceName`
 - ##### `GET`
