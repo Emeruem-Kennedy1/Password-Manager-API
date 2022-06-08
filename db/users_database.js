@@ -35,7 +35,7 @@ const serviceSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-    }
+    },
 });
 
 const service = mongoose.model('Password', serviceSchema);
