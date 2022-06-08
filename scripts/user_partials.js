@@ -1,6 +1,5 @@
 const [User, Password] = require('../db/users_database');
 const bcrypt = require('bcrypt');
-const { response } = require('express');
 
 function getUser(req, res) {
     User.findOne({username: req.params.user}, (err, user) => {
