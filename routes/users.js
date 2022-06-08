@@ -1,5 +1,4 @@
 const express = require('express');
-const [User, Service] = require('../db/users_database');
 const authenticate = require('../routes/admin_auth');
 const {getUsers, postUsers, deleteUsers} = require('../scripts/users_partials');
 const {getUser} = require('../scripts/user_partials');
