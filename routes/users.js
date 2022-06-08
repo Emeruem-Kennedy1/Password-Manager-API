@@ -1,7 +1,7 @@
 const express = require('express');
 const authenticate = require('../routes/admin_auth');
 const {getUsers, postUsers, deleteUsers} = require('../scripts/users_partials');
-const {getUser} = require('../scripts/user_partials');
+const {getUser, patchUser} = require('../scripts/user_partials');
 const {getServices, postServices, deleteServices} = require('../scripts/services_partials');
 const {getService,patchService,deleteService } = require('../scripts/single_service_partials');
 
@@ -18,7 +18,7 @@ router.route('/:apikey/users')
 // * creating the user endpoint
 router.route('/:apikey/users/:user')
     .get(authenticate, getUser)
-    // TODO add a patch method to update a user by changing username or password
+    .delete(authenticate, patchUser)
 
 
 // * creating the services endpoint

@@ -1,5 +1,5 @@
 const [User, Password] = require('../db/users_database');
-const md5 = require('md5');
+const bcrypt = require('bcrypt');
 const { response } = require('express');
 
 function getUser(req, res) {
@@ -13,8 +13,32 @@ function getUser(req, res) {
     })
 }
 
+function patchUser(req, res) {
+    User.findOne({username: req.params.user}, (err, user) => {
+        if (err) {console.log(err);}
+        else if (user) {
+            bcrypt.hash(req.body.password, 10, (err, hash) => {
+                if (err) {console.log(err);}
+                else {
+                    user.password = hash;
+                    user.save((err) => {
+                        if (err) {console.log(err);}
+                        else {
+                            res.send('User updated');
+                        }
+                    });
+                }
+            });
+        } else {
+            res.send('User not found');
+        }
+    })
+}
+
+
 
 
 module.exports = {
     getUser,
+    patchUser,
 };
