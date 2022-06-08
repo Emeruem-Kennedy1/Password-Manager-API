@@ -18,7 +18,7 @@ router.route('/:apikey/users')
 // * creating the user endpoint
 router.route('/:apikey/users/:user')
     .get(authenticate, getUser)
-    .delete(authenticate, patchUser)
+    .patch(authenticate, patchUser)
 
 
 // * creating the services endpoint
