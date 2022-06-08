@@ -1,5 +1,7 @@
 const [User, Service] = require('../db/users_database');
 
+
+// * get all services for a user 
 function findUsersServices(req, res, userID) {
     Service.find({user: userID}, (err, services) => {
         if (err) {
@@ -11,6 +13,25 @@ function findUsersServices(req, res, userID) {
     });
 }
 
+function getServices(req, res) {
+    User.findOne({username: req.params.user}, (err, user) => {
+        if (err) {
+            res.send(err);
+        } else {
+            if (user) {
+                userID = user._id;
+                findUsersServices(req, res, userID);
+            } else {
+                res.send('No user found');
+            }
+        }
+    });
+}
+
+
+
+
+// * create a service for a user
 function createAndSaveService(req,res, user) {
     const service = new Service({
         password: req.body.password,
@@ -31,23 +52,6 @@ function createAndSaveService(req,res, user) {
     });
 }
 
-
-function getServices(req, res) {
-    User.findOne({username: req.params.user}, (err, user) => {
-        if (err) {
-            res.send(err);
-        } else {
-            if (user) {
-                userID = user._id;
-                findUsersServices(req, res, userID);
-            } else {
-                res.send('No user found');
-            }
-        }
-    });
-}
-
-
 function postServices(req, res) {
     User.findOne({username: req.params.user}, (err, user) => {
         if (err) {res.send(err);} 
@@ -61,6 +65,10 @@ function postServices(req, res) {
     });
 }
 
+
+
+
+// * delete all services for a user
 function deleteServices(req, res) {
     User.findOne({username: req.params.user}, (err, user) => {
         if (err) {res.send(err);} 
