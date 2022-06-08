@@ -1,4 +1,3 @@
-const express = require('express');
 const [Admin] = require('../db/admin_database');
 
 
