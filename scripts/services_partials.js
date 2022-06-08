@@ -1,10 +1,11 @@
 const [User, Service] = require('../db/users_database');
 
-function findUsersServices(req, res, services) {
-    Service.find({_id: {$in: services}}, (err, services) => {
+function findUsersServices(req, res, userID) {
+    Service.find({user: userID}, (err, services) => {
         if (err) {
             res.send(err);
-        } else {
+        }
+        else {
             res.json(services);
         }
     });
@@ -15,17 +16,15 @@ function createAndSaveService(req,res, user) {
         password: req.body.password,
         serviceName: req.body.serviceName,
         username: req.body.username,
+        user: user._id,
     });
     service.save((err) => {
         if (err) {res.send(err);}
         else {
-            console.log('service saved');
-            user.services.push(service._id);
-            user.save((err) => {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.send('Service successfully created');
+            service.save((err) => {
+                if (err) {res.send(err);}
+                else {
+                    res.json({message: 'Service created!'});
                 }
             });
         }
@@ -39,8 +38,8 @@ function getServices(req, res) {
             res.send(err);
         } else {
             if (user) {
-                const services = user.services;
-                findUsersServices(req, res, services);
+                userID = user._id;
+                findUsersServices(req, res, userID);
             } else {
                 res.send('No user found');
             }
