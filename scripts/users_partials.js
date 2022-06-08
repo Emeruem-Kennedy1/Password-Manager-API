@@ -1,4 +1,5 @@
 const [User, Password] = require('../db/users_database');
+const bcrypt = require('bcrypt');
 
 function getUsers(req, res) {
     User.find({}, (err, users) => {
@@ -13,18 +14,22 @@ function getUsers(req, res) {
 };
 
 function postUsers(req, res) {
-    console.log(req.body);
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-    });
-    user.save((err) => {
-        if (err) {console.log(err);} 
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+        if (err) {console.log(err);}
         else {
-            res.send('User successfully created');
+            const user = new User({
+                username: req.body.username,
+                password: hash,
+                email: req.body.email,
+            });
+            user.save((err) => {
+                if (err) {console.log(err);} 
+                else {
+                    res.send('User successfully created');
+                }
+            })
         }
-    })
+    });
 };
 
 function deleteUsers (req, res) {
