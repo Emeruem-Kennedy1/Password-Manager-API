@@ -1,13 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const md5 = require('md5');
 const app = express();
-
-
+const users = require('./routes/users');
 require('dotenv').config();
 
-const users = require('./routes/users');
+
 app.use(bodyParser.urlencoded({extended: true}));
 
 // * use the users route to get a user
