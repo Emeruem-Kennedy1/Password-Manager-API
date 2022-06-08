@@ -4,6 +4,7 @@ const authenticate = require('../routes/admin_auth');
 const {getUsers, postUsers, deleteUsers} = require('../scripts/users_partials');
 const {getUser} = require('../scripts/user_partials');
 const {getServices, postServices, deleteServices} = require('../scripts/services_partials');
+const {getService,patchService,deleteService } = require('../scripts/single_service_partials');
 
 const router = express.Router();
 
@@ -27,5 +28,9 @@ router.route('/:apikey/users/:user/services')
     .post(authenticate, postServices)
     .delete(authenticate, deleteServices)
 
+router.route('/:apikey/users/:user/services/:serviceID')
+    .get(authenticate, getService)
+    .patch(authenticate, patchService)
+    .delete(authenticate, deleteService)
 
 module.exports = router;
