@@ -18,6 +18,7 @@ router.route('/:apikey/users')
 // * creating the user endpoint
 router.route('/:apikey/users/:user')
     .get(authenticate, getUser)
+    // TODO add a patch method to update a user by changing username or password
 
 
 // * creating the services endpoint
