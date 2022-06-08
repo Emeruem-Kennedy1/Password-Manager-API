@@ -28,16 +28,17 @@
 |--------|-------------|
 | `GET` | Get all services for a specific user|
 | `DELETE` | Delete deletes all services for a specific user.|
-| `POST` | Create a new service for a specific user. The required fields are `title`, `username`, `password`, and `url`. |
+| `POST` | Create a new service for a specific user. The required fields are `title`, `username`, `password`|
 | `PUT` | Not supported |
 | `PATCH` | Not Supported |
 
-#### `/users/:username/:services/:serviceName`
+
+#### `/users/:username/:services/:serviceID`
 | Method | Description |
 |--------|-------------|
 | `GET` | Get a specific service details for a specific user |
-| `DELETE` | Delete a service for a specific user. The required fields are `serviceName`, `username`, and `password`.|
+| `DELETE` | Delete a service for a specific user.|
+| `PATCH` |update a service for a specific user. The required fields are `serviceName`, `username`, and `password`.|
 | `POST` | Not supported |
 | `PUT` | Not supported |
-| `PATCH` |update a service for a specific user. The required fields are `serviceName`, `username`, and `password`.|
 
