@@ -11,7 +11,7 @@ const users = require('./routes/users');
 app.use(bodyParser.urlencoded({extended: true}));
 
 // * use the users route to get a user
-app.use('/api', users);
+app.use('/api/v1', users);
 
 
 app.get('/', (req, res) => {
