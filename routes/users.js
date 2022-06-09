@@ -1,5 +1,5 @@
 const express = require('express');
-const authenticate = require('../routes/admin_auth');
+const authenticate = require('../scripts/admin_auth');
 const {getUsers, postUsers, deleteUsers} = require('../scripts/users_partials');
 const {getUser, patchUser} = require('../scripts/user_partials');
 const {getServices, postServices, deleteServices} = require('../scripts/services_partials');
