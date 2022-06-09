@@ -1,7 +1,62 @@
 ## Password Manager app API
 
+#### Local Use
+To use the app locally, you can use the following command to install the app dependencies:
+```
+ $ npm i
+```
+### Installation
 
-## Endpoints
+Clone the project:
+
+```
+git clone https://github.com/Emeruem-Kennedy1/Password-Manager-API.git
+```
+
+Move into the project directory and install it's dependencies:
+
+```
+cd Password-Manager-API/
+npm i
+```
+
+Start the mongoDB server on your local machine (if you don't have it already). If you don't have mongoDB installed, you can download it from [here](https://www.mongodb.com/downloads). You can install mongoDB for your OS by following the instructions on 
+- [MongoDB mac installation tutorial](https://www.youtube.com/watch?v=4crXgQZG4W8&t=386s)
+- [MongoDB windows installation tutorial](https://www.youtube.com/watch?v=Ph1Z97X6xno&ab_channel=ProgrammingKnowledge)
+
+After installation, you can start the server by running the following command:
+
+```
+mongod
+```
+
+After starting the monogoDB server, you can start the app by running the following command:
+
+```
+npm run app
+```
+or by running the following command if you have nodemon installed:
+
+```
+nodemon app.js
+```
+
+
+### API Entrypoint
+The API entry point is the following:
+    
+http://localhost:3000/api/v1/{API_KEY}
+
+to create a new API key, you should create a new api key by creatin a .env file in the root directory of the project. The file should contain the following:
+
+```
+ADMIN_PASSWORD=password
+ADMIN_USERNAME=username
+```
+check the console for the API key.
+
+### API Endpoints
+The API has the following endpoints:
 #### `/users`
 | Method | Description |
 |--------|-------------|
