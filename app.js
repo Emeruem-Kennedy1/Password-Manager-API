@@ -1,9 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const users = require('./routes/users');
-require('dotenv').config();
 
+
+const users = require('./routes/users');
 
 app.use(bodyParser.urlencoded({extended: true}));
 
