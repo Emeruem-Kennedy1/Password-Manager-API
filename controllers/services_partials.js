@@ -3,18 +3,21 @@ const [User, Service] = require('../db/users_database');
 
 // * get all services for a user 
 function findUsersServices(req, res, userID) {
-    Service.find({user: userID}, (err, services) => {
+    Service.find({
+        user: userID
+    }, (err, services) => {
         if (err) {
             res.send(err);
-        }
-        else {
+        } else {
             res.json(services);
         }
     });
 }
 
 function getServices(req, res) {
-    User.findOne({username: req.params.user}, (err, user) => {
+    User.findOne({
+        username: req.params.user
+    }, (err, user) => {
         if (err) {
             res.send(err);
         } else {
@@ -32,7 +35,7 @@ function getServices(req, res) {
 
 
 // * create a service for a user
-function createAndSaveService(req,res, user) {
+function createAndSaveService(req, res, user) {
     const service = new Service({
         password: req.body.password,
         serviceName: req.body.serviceName,
@@ -40,12 +43,16 @@ function createAndSaveService(req,res, user) {
         user: user._id,
     });
     service.save((err) => {
-        if (err) {res.send(err);}
-        else {
+        if (err) {
+            res.send(err);
+        } else {
             service.save((err) => {
-                if (err) {res.send(err);}
-                else {
-                    res.json({message: 'Service created!'});
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json({
+                        message: 'Service created!'
+                    });
                 }
             });
         }
@@ -53,9 +60,12 @@ function createAndSaveService(req,res, user) {
 }
 
 function postServices(req, res) {
-    User.findOne({username: req.params.user}, (err, user) => {
-        if (err) {res.send(err);} 
-        else {
+    User.findOne({
+        username: req.params.user
+    }, (err, user) => {
+        if (err) {
+            res.send(err);
+        } else {
             if (user) {
                 createAndSaveService(req, res, user);
             } else {
@@ -70,9 +80,12 @@ function postServices(req, res) {
 
 // * delete all services for a user
 function deleteServices(req, res) {
-    User.findOne({username: req.params.user}, (err, user) => {
-        if (err) {res.send(err);} 
-        else {
+    User.findOne({
+        username: req.params.user
+    }, (err, user) => {
+        if (err) {
+            res.send(err);
+        } else {
             if (user) {
                 user.services = [];
                 user.save((err) => {
@@ -92,4 +105,8 @@ function deleteServices(req, res) {
 
 
 
-module.exports = {getServices, postServices, deleteServices};
+module.exports = {
+    getServices,
+    postServices,
+    deleteServices
+};

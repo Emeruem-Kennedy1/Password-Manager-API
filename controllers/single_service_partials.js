@@ -13,16 +13,17 @@ const getService = (req, res) => {
 
 const patchService = (req, res) => {
     Service.findByIdAndUpdate(
-        req.params.serviceID, 
-        req.body,                         
-        {new: true}, 
+        req.params.serviceID,
+        req.body, {
+            new: true
+        },
         (err, service) => {
             if (err) {
                 res.status(500).send(err);
             } else {
                 res.status(200).send(service);
             }
-    });
+        });
 }
 
 const deleteService = (req, res) => {

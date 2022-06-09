@@ -6,9 +6,12 @@ const [Admin] = require('../db/admin_database');
 var isAuthenticated = false;
 
 function authenticate(req, res, next) {
-    Admin.findOne({apikey: req.params.apikey}, (err, user) => {
-        if (err) {console.log(err);} 
-        else if (user) {
+    Admin.findOne({
+        apikey: req.params.apikey
+    }, (err, user) => {
+        if (err) {
+            console.log(err);
+        } else if (user) {
             if (req.params.apikey === user.apikey) {
                 isAuthenticated = true;
                 next();
