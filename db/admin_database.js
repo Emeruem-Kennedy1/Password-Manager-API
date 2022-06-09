@@ -25,19 +25,19 @@ const Admin = mongoose.model('Admin', adminSchema);
 
 // * Create the admin and encrypt the admin apikey to the database
 const admin = Admin({
-    username: 'admin',
+    username: process.env.ADMIN_USERNAME,
     apikey: md5(process.env.ADMIN_PASSWORD)
 });
 
 // * Save the admin to the database if the admin does not exist
-Admin.findOne({ username: 'admin' }, (err, user) => {
+Admin.findOne({ username: process.env.ADMIN_USERNAME }, (err, user) => {
     if (err) {console.log(err);} 
     else if (!user) {
         admin.save((err) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log('Admin user created');
+                console.log(`Admin user created with username: ${process.env.ADMIN_USERNAME} and apikey: ${admin.apikey}`);
             }
         });
     }
