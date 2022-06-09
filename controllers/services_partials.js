@@ -1,5 +1,6 @@
-const [User, Service] = require('../db/users_database');
-
+const {User, Service} = require('../db/users_database');
+const {internalServerErrorResponse} = require('../messages/error_messages.js');
+const {successMessage} = require('../messages/success_messages.js');
 
 // * get all services for a user 
 function findUsersServices(req, res, userID) {
@@ -7,9 +8,12 @@ function findUsersServices(req, res, userID) {
         user: userID
     }, (err, services) => {
         if (err) {
-            res.send(err);
+            internalServerErrorResponse.message = err;
+            res.json(internalServerErrorResponse);
         } else {
-            res.json(services);
+            successMessage.message = 'Services found';
+            successMessage.data = services;
+            res.json(successMessage);
         }
     });
 }
@@ -19,13 +23,16 @@ function getServices(req, res) {
         username: req.params.user
     }, (err, user) => {
         if (err) {
-            res.send(err);
+            internalServerErrorResponse.message = err;
+            res.json(internalServerErrorResponse);
         } else {
             if (user) {
                 userID = user._id;
                 findUsersServices(req, res, userID);
             } else {
-                res.send('No user found');
+                successMessage.message = 'No user found';
+                successMessage.data = [];
+                res.json(successMessage);
             }
         }
     });
@@ -44,15 +51,17 @@ function createAndSaveService(req, res, user) {
     });
     service.save((err) => {
         if (err) {
-            res.send(err);
+            internalServerErrorResponse.message = err;
+            res.json(internalServerErrorResponse);
         } else {
             service.save((err) => {
                 if (err) {
-                    res.send(err);
+                    internalServerErrorResponse.message = err;
+                    res.json(internalServerErrorResponse);
                 } else {
-                    res.json({
-                        message: 'Service created!'
-                    });
+                    successMessage.message = 'Service created';
+                    successMessage.data = service;
+                    res.json(successMessage);
                 }
             });
         }
@@ -64,12 +73,15 @@ function postServices(req, res) {
         username: req.params.user
     }, (err, user) => {
         if (err) {
-            res.send(err);
+            internalServerErrorResponse.message = err;
+            res.json(internalServerErrorResponse);
         } else {
             if (user) {
                 createAndSaveService(req, res, user);
             } else {
-                res.send('No user found');
+                successMessage.message = 'No user found';
+                successMessage.data = [];
+                res.json(successMessage);
             }
         }
     });
@@ -84,19 +96,25 @@ function deleteServices(req, res) {
         username: req.params.user
     }, (err, user) => {
         if (err) {
-            res.send(err);
+            internalServerErrorResponse.message = err;
+            res.json(internalServerErrorResponse);
         } else {
             if (user) {
                 user.services = [];
                 user.save((err) => {
                     if (err) {
-                        res.send(err);
+                        internalServerErrorResponse.message = err;
+                        res.json(internalServerErrorResponse);
                     } else {
-                        res.send('All services deleted');
+                        successMessage.message = 'Services deleted';
+                        successMessage.data = user;
+                        res.json(successMessage);
                     }
                 });
             } else {
-                res.send('No user found');
+                successMessage.message = 'No user found';
+                successMessage.data = [];
+                res.json(successMessage);
             }
         }
     });

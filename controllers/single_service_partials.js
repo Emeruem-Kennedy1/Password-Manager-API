@@ -1,15 +1,20 @@
-const [User, Service] = require('../db/users_database');
+const {User, Service} = require('../db/users_database');
+const {internalServerErrorResponse} = require('../messages/error_messages.js');
+const {successMessage} = require('../messages/success_messages.js');
 
 
 const getService = (req, res) => {
     Service.findById(req.params.serviceID, (err, service) => {
         if (err) {
-            res.status(500).send(err);
+            internalServerErrorResponse.message = err;
+            res.json(internalServerErrorResponse);
         } else {
-            res.status(200).send(service);
+            successMessage.data = service;
+            successMessage.message = 'Service retrieved successfully';
+            res.json(successMessage);
         }
-    })
-}
+    });
+}; 
 
 const patchService = (req, res) => {
     Service.findByIdAndUpdate(
@@ -19,9 +24,12 @@ const patchService = (req, res) => {
         },
         (err, service) => {
             if (err) {
-                res.status(500).send(err);
+                internalServerErrorResponse.message = err;
+                res.json(internalServerErrorResponse);
             } else {
-                res.status(200).send(service);
+                successMessage.data = service;
+                successMessage.message = 'Service updated successfully';
+                res.json(successMessage);
             }
         });
 }
@@ -29,9 +37,12 @@ const patchService = (req, res) => {
 const deleteService = (req, res) => {
     Service.findByIdAndRemove(req.params.serviceID, (err, service) => {
         if (err) {
-            res.status(500).send(err);
+            internalServerErrorResponse.message = err;
+            res.json(internalServerErrorResponse);
         } else {
-            res.status(200).send('Service deleted');
+            successMessage.data = service;
+            successMessage.message = 'Service deleted successfully';
+            res.json (successMessage);
         }
     });
 }

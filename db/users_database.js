@@ -39,8 +39,8 @@ const serviceSchema = new mongoose.Schema({
     },
 });
 
-const service = mongoose.model('Password', serviceSchema);
+const Service = mongoose.model('Password', serviceSchema);
 const User = mongoose.model('User', userSchema);
 
 
-module.exports = [User, service];
+module.exports = {User, Service};

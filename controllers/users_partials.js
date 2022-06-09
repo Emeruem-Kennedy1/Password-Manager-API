@@ -1,15 +1,22 @@
-const [User, Password] = require('../db/users_database');
+const {User, Password} = require('../db/users_database');
+const {internalServerErrorResponse} = require('../messages/error_messages.js');
+const {successMessage} = require('../messages/success_messages.js');
 const bcrypt = require('bcrypt');
 
 function getUsers(req, res) {
     User.find({}, (err, users) => {
         if (err) {
-            console.log(err);
+            internalServerErrorResponse.message = err;
+            res.json(internalServerErrorResponse);
         } else if (users) {
             const usernames = users.map(user => user.username);
-            res.send(usernames);
+            successMessage.data = usernames;
+            successMessage.message = 'Users retrieved successfully';
+            res.json(successMessage);
         } else {
-            res.send('No users found');
+            successMessage.data = [];
+            successMessage.message = 'No users found';
+            res.json(successMessage);
         }
     });
 };
@@ -17,7 +24,8 @@ function getUsers(req, res) {
 function postUsers(req, res) {
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) {
-            console.log(err);
+            internalServerErrorResponse.message = err;
+            res.json(internalServerErrorResponse);
         } else {
             const user = new User({
                 username: req.body.username,
@@ -26,9 +34,12 @@ function postUsers(req, res) {
             });
             user.save((err) => {
                 if (err) {
-                    console.log(err);
+                    internalServerErrorResponse.message = err;
+                    res.json(internalServerErrorResponse);
                 } else {
-                    res.send('User successfully created');
+                    successMessage.data = user;
+                    successMessage.message = 'User created successfully';
+                    res.json(successMessage);
                 }
             })
         }
@@ -38,9 +49,11 @@ function postUsers(req, res) {
 function deleteUsers(req, res) {
     User.deleteMany({}, (err) => {
         if (err) {
-            console.log(err);
+            internalServerErrorResponse.message = err;
+            res.json(internalServerErrorResponse);
         } else {
-            res.send('All users deleted');
+            successMessage.message = 'Users deleted successfully';
+            res.json(successMessage);
         }
     })
 };

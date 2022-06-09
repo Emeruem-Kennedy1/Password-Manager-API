@@ -1,4 +1,5 @@
 const [Admin] = require('../db/admin_database');
+const {accesDeniedErrorResponse} = require('../messages/error_messages.js');
 
 
 // * Authenticate the admin user
@@ -6,20 +7,20 @@ const [Admin] = require('../db/admin_database');
 var isAuthenticated = false;
 
 function authenticate(req, res, next) {
+    
     Admin.findOne({
         apikey: req.params.apikey
     }, (err, user) => {
-        if (err) {
-            console.log(err);
-        } else if (user) {
+        if (err) {console.log(err);} 
+        else if (user) {
             if (req.params.apikey === user.apikey) {
                 isAuthenticated = true;
                 next();
             } else {
-                res.send('You are not authorized to view this page');
+                res.json(accesDeniedErrorResponse);
             }
         } else {
-            res.send('You are not authorized to view this page');
+            res.json(accesDeniedErrorResponse);
         }
     })
 }
