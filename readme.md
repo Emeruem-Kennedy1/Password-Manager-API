@@ -66,7 +66,7 @@ The API has the following endpoints:
 | `PATCH` | Not supported |
 | `PUT` | Not supported |
 
-#### `/users/:user`
+#### `/users/:emailID`
 | Method | Description |
 |--------|-------------|
 | `GET` | Get a user details for the given username |
@@ -78,7 +78,7 @@ The API has the following endpoints:
 
 
 
-#### `/users/:user/:services`
+#### `/users/:emailID/:services`
 | Method | Description |
 |--------|-------------|
 | `GET` | Get all services for a specific user|
@@ -88,7 +88,7 @@ The API has the following endpoints:
 | `PATCH` | Not Supported |
 
 
-#### `/users/:username/:services/:serviceID`
+#### `/users/:emailID/:services/:serviceID`
 | Method | Description |
 |--------|-------------|
 | `GET` | Get a specific service details for a specific user |
