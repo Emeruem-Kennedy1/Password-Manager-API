@@ -6,10 +6,18 @@ const app = express();
 
 const users = require('./routes/users');
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true,
+}));
+app.use(bodyParser.json());
 
 // * use the users route to get a user
 app.use('/api/v1', users);
+
+app.use((req, res, next) => {
+    res.contentType('application/json');
+    next();
+});
 
 
 app.get('/', (req, res) => {
