@@ -10,7 +10,7 @@ const notFoundErrorResponse = {
 
 const internalServerErrorResponse = {
     status: 500,
-    message: ''
+    message: 'Internal server error.'
 };
 
 
