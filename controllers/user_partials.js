@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 function getUser(req, res) {
     User.findOne({
-        username: req.params.user
+        email: req.params.emailID
     }, (err, user) => {
         if (err) {
             internalServerErrorResponse.message = err;
@@ -13,7 +13,7 @@ function getUser(req, res) {
         } else if (user) {
             successMessage.message = 'User found';
             successMessage.data = user;
-            successMessage.data.password = '******';
+            // successMessage.data.password = '******';
             res.send(successMessage);
         } else {
             res.send('User not found');
@@ -23,7 +23,7 @@ function getUser(req, res) {
 
 function patchUser(req, res) {
     User.findOne({
-        username: req.params.user
+        email: req.params.emailID
     }, (err, user) => {
         if (err) {
             internalServerErrorResponse.message = err;
@@ -42,7 +42,7 @@ function patchUser(req, res) {
                         } else {
                             successMessage.message = 'User updated';
                             successMessage.data = user;
-                            successMessage.data.password = '******';
+                            // successMessage.data.password = '******';
                             res.json(successMessage);
                         }
                     });

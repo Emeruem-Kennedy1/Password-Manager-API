@@ -20,14 +20,14 @@ function findUsersServices(req, res, userID) {
 
 function getServices(req, res) {
     User.findOne({
-        username: req.params.user
+        email: req.params.emailID
     }, (err, user) => {
         if (err) {
             internalServerErrorResponse.message = err;
             res.json(internalServerErrorResponse);
         } else {
             if (user) {
-                userID = user._id;
+                const userID = user._id;
                 findUsersServices(req, res, userID);
             } else {
                 successMessage.message = 'No user found';
@@ -70,7 +70,7 @@ function createAndSaveService(req, res, user) {
 
 function postServices(req, res) {
     User.findOne({
-        username: req.params.user
+        email: req.params.emailID
     }, (err, user) => {
         if (err) {
             internalServerErrorResponse.message = err;
@@ -93,7 +93,7 @@ function postServices(req, res) {
 // * delete all services for a user
 function deleteServices(req, res) {
     User.findOne({
-        username: req.params.user
+        email: req.params.emailID
     }, (err, user) => {
         if (err) {
             internalServerErrorResponse.message = err;
