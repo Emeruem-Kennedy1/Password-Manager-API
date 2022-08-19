@@ -31,18 +31,18 @@ router.route('/:apikey/users')
 
 
 // * creating the user endpoint
-router.route('/:apikey/users/:user')
+router.route('/:apikey/users/:emailID')
     .get(authenticate, getUser)
     .patch(authenticate, patchUser)
 
 
 // * creating the services endpoint
-router.route('/:apikey/users/:user/services')
+router.route('/:apikey/users/:emailID/services')
     .get(authenticate, getServices)
     .post(authenticate, postServices)
     .delete(authenticate, deleteServices)
 
-router.route('/:apikey/users/:user/services/:serviceID')
+router.route('/:apikey/users/:emailID/services/:serviceID')
     .get(authenticate, getService)
     .patch(authenticate, patchService)
     .delete(authenticate, deleteService)
