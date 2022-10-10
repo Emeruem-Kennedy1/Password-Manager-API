@@ -42,7 +42,6 @@ function patchUser(req, res) {
                         } else {
                             successMessage.message = 'User updated';
                             successMessage.data = user;
-                            // successMessage.data.password = '******';
                             res.json(successMessage);
                         }
                     });
