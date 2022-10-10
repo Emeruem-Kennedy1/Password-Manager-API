@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const md5 = require('md5');
 
-const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/passwordManageradminDB';
+const mongoUri = process.env.MONGODB_URI
 
 mongoose.connect(mongoUri, { useNewUrlParser: true });
 mongoose.connection.on('connected', () => {
